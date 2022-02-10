@@ -2,6 +2,8 @@ module github.com/ONSdigital/dp-release-calendar-api
 
 go 1.17
 
+replace github.com/spf13/viper => github.com/spf13/viper v1.9.0
+
 require (
 	github.com/ONSdigital/dp-component-test v0.6.4
 	github.com/ONSdigital/dp-healthcheck v1.2.3
@@ -25,7 +27,7 @@ require (
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/gofrs/uuid v4.0.0+incompatible // indirect
-	github.com/golang/snappy v0.0.1 // indirect
+	github.com/golang/snappy v0.0.3 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20210202160940-bed99a852dfe // indirect
 	github.com/hashicorp/go-immutable-radix v1.3.0 // indirect
 	github.com/hashicorp/go-memdb v1.3.0 // indirect
