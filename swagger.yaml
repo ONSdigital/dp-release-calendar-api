@@ -10,22 +10,26 @@ basePath: "/v1"
 schemes:
   - http
 tags:
-  - name: "hello"
   - name: "private"
+  - name: "public"
 paths:
-  /hello:
+  /legacy:
     get:
       tags:
-        - hello
-      summary: Example hello world endpoint
-      description: Returns an example payload.
+        - public
+      summary: "Get a legacy release calendar"
+      description: "Returns a release calendar entry stored in Zebedee"
+      parameters:
+        - $ref: '#/parameters/url'
       produces:
         - application/json
       responses:
         200:
           description: OK
           schema:
-            $ref: "#/definitions/HelloResponse"
+            $ref: "#/definitions/ReleaseCalendarEntry"
+        404:
+          $ref: '#/responses/NotFound'
         500:
           $ref: '#/responses/InternalError'
 
@@ -50,15 +54,130 @@ paths:
 responses:
   InternalError:
     description: "Failed to process the request due to an internal error"
+  NotFound:
+    description: "URL not found"
+
+parameters:
+  url:
+    name: url
+    description: The url for the legacy release calendar entry.
+    type: string
+    required: true
+    in: query
 
 definitions:
-  HelloResponse:
+  ReleaseCalendarEntry:
     type: object
     properties:
-      message:
+      markdown:
+        type: array
+        description: "Markdwon"
+        items:
+          type: string
+      relatedDocuments:
+        type: array
+        description: "Related documents"
+        items:
+         $ref: '#/definitions/Link'
+      relatedDatasets:
+        type: array
+        description: "Related datasets"
+        items:
+         $ref: '#/definitions/Link'
+      relatedMethodology:
+        type: array
+        description: "Related methodology"
+        items:
+         $ref: '#/definitions/Link'
+      relatedMethodologyArticle:
+        type: array
+        description: "Related methodology article"
+        items:
+         $ref: '#/definitions/Link'
+      links:
+        type: array
+        description: "Links"
+        items:
+         $ref: '#/definitions/Link'
+      dateChanges:
+        type: array
+        description: "Release date changes"
+        items:
+         $ref: '#/definitions/ReleaseDateChange'
+      uri:
         type: string
-        description: "Message returned by hello world endpoint"
-        example: "Hello, world!"
+        example: "/releases/earningsandemploymentfrompayasyouearnrealtimeinformationukfebruary2022"
+      description:
+        type: object
+        properties:
+          title:
+            type: string
+            description: "Release title"
+          summary:
+            type: string
+            description: "Release description"
+          contact:
+            type: object
+            description: "Release contact"
+            properties:
+              name:
+                type: string
+                description: "Contact name"
+              email:
+                type: string
+                description: "Contact email"
+              telephone:
+                type: string
+                description: "Contact telephone number"
+          nationalStatistic:
+            type: boolean
+            description: "Indicates if it refers to a national statistic"
+          releaseDate:
+            type: string
+            format: "date-time"
+            description: "Release date"
+          nextRelease:
+            type: string
+            description: "Next release date"
+          published:
+            type: boolean
+            description: "Indicates if it is a published release"
+          finalised:
+            type: boolean
+            description: "Indicates if it is a finalised release"
+          cancelled:
+            type: boolean
+            description: "Indicates if it is a cancelled release"
+          cancellationNotice:
+            type: array
+            description: "Cancellation notices"
+            items:
+              type: string
+          provisionalDate:
+            type: string
+            description: "Provisional date"
+  Link:
+    type: object
+    properties:
+      title:
+        type: string
+        description: "Title"
+      summary:
+        type: string
+        description: "Summary"
+      uri:
+        type: string
+        description: "URI"
+  ReleaseDateChange:
+    type: object
+    properties:
+      previousDate:
+        type: string
+        format: "date-time"
+        description: "Date of change"
+      changeNotice:
+        type: string
+        description: "Change notice"
   Health:
     type: object
     properties:
