@@ -28,6 +28,7 @@ func TestConfig(t *testing.T) {
 					GracefulShutdownTimeout:    5 * time.Second,
 					HealthCheckInterval:        30 * time.Second,
 					HealthCheckCriticalTimeout: 90 * time.Second,
+					APIRouterURL:               "http://localhost:23200/v1",
 				})
 			})
 

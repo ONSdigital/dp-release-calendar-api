@@ -51,12 +51,15 @@ github.com/ONSdigital/dp-api-clients-go v1.28.0/go.mod h1:iyJy6uRL4B6OYOJA0XMr5U
 github.com/ONSdigital/dp-api-clients-go v1.34.3/go.mod h1:kX+YKuoLYLfkeLHMvQKRRydZVxO7ZEYyYiwG2xhV51E=
 github.com/ONSdigital/dp-api-clients-go v1.41.1 h1:xkeT6dCTFSAoBpZxgiJUiuqgcfjCX+c52CIiZo1Y2iU=
 github.com/ONSdigital/dp-api-clients-go v1.41.1/go.mod h1:Ga1+ANjviu21NFJI9wp5NctJIdB4TJLDGbpQFl2V8Wc=
+github.com/ONSdigital/dp-api-clients-go/v2 v2.9.7-0.20220218164228-f814ea59477a h1:ywTWo2N+hjmRbADdzrgheJU0xWSZANegDjA1eQcbwsM=
+github.com/ONSdigital/dp-api-clients-go/v2 v2.9.7-0.20220218164228-f814ea59477a/go.mod h1:P3GYyqqXnbp4RjWhz0oYpUFjHPT6Ca4fEoh4huNkxHU=
 github.com/ONSdigital/dp-component-test v0.6.4 h1:zaEm1nkOSabyh5bSxsN7qt9F7FKj199HHvTKOElszlY=
 github.com/ONSdigital/dp-component-test v0.6.4/go.mod h1:Jg4qZJf+cW+L/BvdzDphruMgB8QEHg2YK4WH9jVJh44=
 github.com/ONSdigital/dp-healthcheck v1.0.5/go.mod h1:2wbVAUHMl9+4tWhUlxYUuA1dnf2+NrwzC+So5f5BMLk=
 github.com/ONSdigital/dp-healthcheck v1.1.0/go.mod h1:vZwyjMJiCHjp/sJ2R1ZEqzZT0rJ0+uHVGwxqdP4J5vg=
 github.com/ONSdigital/dp-healthcheck v1.2.3 h1:8/qTe0TjXouQWW0jgrtDGMFl+fUWigfyntL+q96GUSY=
 github.com/ONSdigital/dp-healthcheck v1.2.3/go.mod h1:XUhXoDIWPCdletDtpDOoXhmDFcc9b/kbedx96jN75aI=
+github.com/ONSdigital/dp-mocking v0.0.0-20190905163309-fee2702ad1b9 h1:+WXVfTDyWXY1DQRDFSmt1b/ORKk5c7jGiPu7NoeaM/0=
 github.com/ONSdigital/dp-mocking v0.0.0-20190905163309-fee2702ad1b9/go.mod h1:BcIRgitUju//qgNePRBmNjATarTtynAgc0yV29VpLEk=
 github.com/ONSdigital/dp-mongodb-in-memory v1.2.0 h1:rv4fMJXul4KLU2INlzGF73/EWz4Zezndn53ZAKY4gAo=
 github.com/ONSdigital/dp-mongodb-in-memory v1.2.0/go.mod h1:AQaNcbSS18WtldA4iWUlHQDn9FCLB2K6ff68QnvZBqM=
@@ -72,6 +75,7 @@ github.com/ONSdigital/log.go v1.0.0/go.mod h1:UnGu9Q14gNC+kz0DOkdnLYGoqugCvnokHB
 github.com/ONSdigital/log.go v1.0.1-0.20200805084515-ee61165ea36a/go.mod h1:dDnQATFXCBOknvj6ZQuKfmDhbOWf3e8mtV+dPEfWJqs=
 github.com/ONSdigital/log.go v1.0.1-0.20200805145532-1f25087a0744/go.mod h1:y4E9MYC+cV9VfjRD0UBGj8PA7H3wABqQi87/ejrDhYc=
 github.com/ONSdigital/log.go v1.0.1/go.mod h1:dIwSXuvFB5EsZG5x44JhsXZKMd80zlb0DZxmiAtpL4M=
+github.com/ONSdigital/log.go v1.1.0 h1:XFE8U5lPeiXyujgUtbh+pKCotiICeIGFEAauNk9c24A=
 github.com/ONSdigital/log.go v1.1.0/go.mod h1:0hOVuYR3bDUI30VRo48d5KHfJIoe+spuPXqgt6UF78o=
 github.com/ONSdigital/log.go/v2 v2.0.0/go.mod h1:PR7vXrv9dZKUc7SI/0toxBbStk84snmybBnWpe+xY2o=
 github.com/ONSdigital/log.go/v2 v2.0.5/go.mod h1:PR7vXrv9dZKUc7SI/0toxBbStk84snmybBnWpe+xY2o=

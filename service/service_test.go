@@ -10,6 +10,7 @@ import (
 
 	"github.com/ONSdigital/dp-healthcheck/healthcheck"
 
+	"github.com/ONSdigital/dp-release-calendar-api/api"
 	"github.com/ONSdigital/dp-release-calendar-api/config"
 	"github.com/ONSdigital/dp-release-calendar-api/service"
 	"github.com/ONSdigital/dp-release-calendar-api/service/mock"
@@ -51,6 +52,7 @@ func TestRun(t *testing.T) {
 			StartFunc:    func(ctx context.Context) {},
 		}
 
+		zcMock := &api.ZebedeeClientMock{}
 		serverWg := &sync.WaitGroup{}
 		serverMock := &serviceMock.HTTPServerMock{
 			ListenAndServeFunc: func() error {
@@ -74,6 +76,8 @@ func TestRun(t *testing.T) {
 			return serverMock
 		}
 
+		funcDoGetZebedeeClient := func(url string) api.ZebedeeClient { return zcMock }
+
 		funcDoGetFailingHTTPSerer := func(bindAddr string, router http.Handler) service.HTTPServer {
 			return failingServerMock
 		}
@@ -82,8 +86,9 @@ func TestRun(t *testing.T) {
 
 			// setup (run before each `Convey` at this scope / indentation):
 			initMock := &serviceMock.InitialiserMock{
-				DoGetHTTPServerFunc:  funcDoGetHTTPServerNil,
-				DoGetHealthCheckFunc: funcDoGetHealthcheckErr,
+				DoGetHTTPServerFunc:    funcDoGetHTTPServerNil,
+				DoGetHealthCheckFunc:   funcDoGetHealthcheckErr,
+				DoGetZebedeeClientFunc: funcDoGetZebedeeClient,
 			}
 			svcErrors := make(chan error, 1)
 			svcList := service.NewServiceList(initMock)
@@ -103,8 +108,9 @@ func TestRun(t *testing.T) {
 
 			// setup (run before each `Convey` at this scope / indentation):
 			initMock := &serviceMock.InitialiserMock{
-				DoGetHTTPServerFunc:  funcDoGetHTTPServer,
-				DoGetHealthCheckFunc: funcDoGetHealthcheckOk,
+				DoGetHTTPServerFunc:    funcDoGetHTTPServer,
+				DoGetHealthCheckFunc:   funcDoGetHealthcheckOk,
+				DoGetZebedeeClientFunc: funcDoGetZebedeeClient,
 			}
 			svcErrors := make(chan error, 1)
 			svcList := service.NewServiceList(initMock)
@@ -117,7 +123,7 @@ func TestRun(t *testing.T) {
 			})
 
 			Convey("The checkers are registered and the healthcheck and http server started", func() {
-				So(len(hcMock.AddCheckCalls()), ShouldEqual, 0)
+				So(len(hcMock.AddCheckCalls()), ShouldEqual, 1)
 				So(len(initMock.DoGetHTTPServerCalls()), ShouldEqual, 1)
 				So(initMock.DoGetHTTPServerCalls()[0].BindAddr, ShouldEqual, "localhost:27800")
 				So(len(hcMock.StartCalls()), ShouldEqual, 1)
@@ -131,8 +137,7 @@ func TestRun(t *testing.T) {
 			})
 		})
 
-		// ADD CODE: put this code in, if you have Checkers to register
-		/*Convey("Given that Checkers cannot be registered", func() {
+		Convey("Given that Checkers cannot be registered", func() {
 
 			// setup (run before each `Convey` at this scope / indentation):
 			errAddheckFail := errors.New("Error(s) registering checkers for healthcheck")
@@ -146,30 +151,31 @@ func TestRun(t *testing.T) {
 				DoGetHealthCheckFunc: func(cfg *config.Config, buildTime string, gitCommit string, version string) (service.HealthChecker, error) {
 					return hcMockAddFail, nil
 				},
-				// ADD CODE: add the checkers that you want to register here
+				DoGetZebedeeClientFunc: funcDoGetZebedeeClient,
 			}
 			svcErrors := make(chan error, 1)
 			svcList := service.NewServiceList(initMock)
 			_, err := service.Run(ctx, cfg, svcList, testBuildTime, testGitCommit, testVersion, svcErrors)
 
 			Convey("Then service Run fails, but all checks try to register", func() {
-				So(err, ShouldBeNil)
+				So(err, ShouldNotBeNil)
 				So(err.Error(), ShouldResemble, fmt.Sprintf("unable to register checkers: %s", errAddheckFail.Error()))
 				So(svcList.HealthCheck, ShouldBeTrue)
-				// ADD CODE: add code to confirm checkers exist
-				So(len(hcMockAddFail.AddCheckCalls()), ShouldEqual, 0) // ADD CODE: change the '0' to the number of checkers you have registered
+				So(len(hcMockAddFail.AddCheckCalls()), ShouldEqual, 1)
+				So(hcMockAddFail.AddCheckCalls()[0].Name, ShouldResemble, "Zebedee")
 			})
 			Reset(func() {
 				// This reset is run after each `Convey` at the same scope (indentation)
 			})
-		})*/
+		})
 
 		Convey("Given that all dependencies are successfully initialised but the http server fails", func() {
 
 			// setup (run before each `Convey` at this scope / indentation):
 			initMock := &serviceMock.InitialiserMock{
-				DoGetHealthCheckFunc: funcDoGetHealthcheckOk,
-				DoGetHTTPServerFunc:  funcDoGetFailingHTTPSerer,
+				DoGetHealthCheckFunc:   funcDoGetHealthcheckOk,
+				DoGetHTTPServerFunc:    funcDoGetFailingHTTPSerer,
+				DoGetZebedeeClientFunc: funcDoGetZebedeeClient,
 			}
 			svcErrors := make(chan error, 1)
 			svcList := service.NewServiceList(initMock)
@@ -206,6 +212,8 @@ func TestClose(t *testing.T) {
 			StopFunc:     func() { hcStopped = true },
 		}
 
+		zcMock := &api.ZebedeeClientMock{}
+
 		// server Shutdown will fail if healthcheck is not stopped
 		serverMock := &mock.HTTPServerMock{
 			ListenAndServeFunc: func() error { return nil },
@@ -224,6 +232,7 @@ func TestClose(t *testing.T) {
 				DoGetHealthCheckFunc: func(cfg *config.Config, buildTime string, gitCommit string, version string) (service.HealthChecker, error) {
 					return hcMock, nil
 				},
+				DoGetZebedeeClientFunc: func(url string) api.ZebedeeClient { return zcMock },
 			}
 
 			svcErrors := make(chan error, 1)
@@ -251,6 +260,7 @@ func TestClose(t *testing.T) {
 				DoGetHealthCheckFunc: func(cfg *config.Config, buildTime string, gitCommit string, version string) (service.HealthChecker, error) {
 					return hcMock, nil
 				},
+				DoGetZebedeeClientFunc: func(url string) api.ZebedeeClient { return zcMock },
 			}
 
 			svcErrors := make(chan error, 1)

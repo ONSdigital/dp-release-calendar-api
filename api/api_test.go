@@ -5,6 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/ONSdigital/dp-api-clients-go/v2/zebedee"
 	"github.com/gorilla/mux"
 	. "github.com/smartystreets/goconvey/convey"
 )
@@ -13,12 +14,17 @@ func TestSetup(t *testing.T) {
 	Convey("Given an API instance", t, func() {
 		r := mux.NewRouter()
 		ctx := context.Background()
-		api := Setup(ctx, r)
 
-		// TODO: remove hello world example handler route test case
+		mockZebedeeClient := &ZebedeeClientMock{
+			GetReleaseFunc: func(ctx context.Context, userAccessToken, collectionID, lang, uri string) (zebedee.Release, error) {
+				return zebedee.Release{}, nil
+			},
+		}
+
+		api := Setup(ctx, r, mockZebedeeClient)
+
 		Convey("When created the following routes should have been added", func() {
-			// Replace the check below with any newly added api endpoints
-			So(hasRoute(api.Router, "/hello", "GET"), ShouldBeTrue)
+			So(hasRoute(api.Router, "/releasecalendar/legacy", "GET"), ShouldBeTrue)
 		})
 	})
 }

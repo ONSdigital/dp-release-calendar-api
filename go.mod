@@ -5,6 +5,7 @@ go 1.17
 replace github.com/spf13/viper => github.com/spf13/viper v1.9.0
 
 require (
+	github.com/ONSdigital/dp-api-clients-go/v2 v2.9.7-0.20220218164228-f814ea59477a
 	github.com/ONSdigital/dp-component-test v0.6.4
 	github.com/ONSdigital/dp-healthcheck v1.2.3
 	github.com/ONSdigital/dp-net v1.4.0
@@ -14,12 +15,12 @@ require (
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/pkg/errors v0.9.1
 	github.com/smartystreets/goconvey v1.7.2
-	github.com/stretchr/testify v1.7.0
 )
 
 require (
 	github.com/ONSdigital/dp-api-clients-go v1.41.1 // indirect
 	github.com/ONSdigital/dp-mongodb-in-memory v1.2.0 // indirect
+	github.com/ONSdigital/log.go v1.1.0 // indirect
 	github.com/aws/aws-sdk-go v1.38.15 // indirect
 	github.com/cucumber/gherkin-go/v19 v19.0.3 // indirect
 	github.com/cucumber/messages-go/v16 v16.0.1 // indirect
@@ -44,6 +45,7 @@ require (
 	github.com/smartystreets/assertions v1.2.0 // indirect
 	github.com/spf13/afero v1.8.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.0.2 // indirect
 	github.com/xdg-go/stringprep v1.0.2 // indirect
