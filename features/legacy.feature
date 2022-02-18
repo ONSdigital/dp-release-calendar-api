@@ -11,28 +11,28 @@ Feature: Legacy endpoint
         {
             "uri":"/release/economy",
             "markdown":["markdown 1", "markdown 2"],
-            "relatedDocuments": [
+            "related_documents": [
                 {
                 "title": "Document 1",
                 "summary": "This is document 1",
                 "uri": "/doc/1"
                 }
             ],
-            "relatedDatasets": [
+            "related_datasets": [
                 {
                 "title": "Dataset 1",
                 "summary": "This is dataset 1",
                 "uri": "/dataset/1"
                 }
             ],
-            "relatedMethodology": [
+            "related_methodology": [
                 {
                 "title": "Methodology",
                 "summary": "This is methodology 1",
                 "uri": "/methodology/1"
                 }
             ],
-            "relatedMethodologyArticle": [
+            "related_methodology_article": [
                 {
                 "title": "Methodology Article",
                 "summary": "This is methodology article 1",
@@ -46,10 +46,10 @@ Feature: Legacy endpoint
                 "uri": "/link/1"
                 }
             ],
-            "dateChanges": [
+            "date_changes": [
                 {
-                "previousDate": "2022-02-15T11:12:05.592Z",
-                "changeNotice": "This release has changed"
+                "previous_date": "2022-02-15T11:12:05.592Z",
+                "change_notice": "This release has changed"
                 }
             ],
             "description": {
@@ -60,14 +60,14 @@ Feature: Legacy endpoint
                 "name":"Contact name", 
                 "telephone":"029"
               }, 
-              "nationalStatistic":true, 
-              "releaseDate":"2020-07-08T23:00:00.000Z",
-              "nextRelease":"January 2021",
+              "national_statistic":true, 
+              "release_date":"2020-07-08T23:00:00.000Z",
+              "next_release":"January 2021",
               "published":true,
               "finalised":true,
               "cancelled":true,
-              "cancellationNotice":["cancelled for a reason"],
-              "provisionalDate":"July 2020"
+              "cancellation_notice":["cancelled for a reason"],
+              "provisional_date":"July 2020"
             }
         }
         """

@@ -74,22 +74,22 @@ definitions:
         description: "Markdwon"
         items:
           type: string
-      relatedDocuments:
+      related_documents:
         type: array
         description: "Related documents"
         items:
          $ref: '#/definitions/Link'
-      relatedDatasets:
+      related_datasets:
         type: array
         description: "Related datasets"
         items:
          $ref: '#/definitions/Link'
-      relatedMethodology:
+      related_methodology:
         type: array
         description: "Related methodology"
         items:
          $ref: '#/definitions/Link'
-      relatedMethodologyArticle:
+      related_methodology_article:
         type: array
         description: "Related methodology article"
         items:
@@ -99,7 +99,7 @@ definitions:
         description: "Links"
         items:
          $ref: '#/definitions/Link'
-      dateChanges:
+      date_changes:
         type: array
         description: "Release date changes"
         items:
@@ -129,14 +129,14 @@ definitions:
               telephone:
                 type: string
                 description: "Contact telephone number"
-          nationalStatistic:
+          national_statistic:
             type: boolean
             description: "Indicates if it refers to a national statistic"
-          releaseDate:
+          release_date:
             type: string
             format: "date-time"
             description: "Release date"
-          nextRelease:
+          next_release:
             type: string
             description: "Next release date"
           published:
@@ -148,12 +148,12 @@ definitions:
           cancelled:
             type: boolean
             description: "Indicates if it is a cancelled release"
-          cancellationNotice:
+          cancellation_notice:
             type: array
             description: "Cancellation notices"
             items:
               type: string
-          provisionalDate:
+          provisional_date:
             type: string
             description: "Provisional date"
   Link:
@@ -171,11 +171,11 @@ definitions:
   ReleaseDateChange:
     type: object
     properties:
-      previousDate:
+      previous_date:
         type: string
         format: "date-time"
         description: "Date of change"
-      changeNotice:
+      change_notice:
         type: string
         description: "Change notice"
   Health:
