@@ -5,7 +5,7 @@ go 1.17
 replace github.com/spf13/viper => github.com/spf13/viper v1.9.0
 
 require (
-	github.com/ONSdigital/dp-api-clients-go/v2 v2.9.7-0.20220218164228-f814ea59477a
+	github.com/ONSdigital/dp-api-clients-go/v2 v2.92.4
 	github.com/ONSdigital/dp-component-test v0.6.4
 	github.com/ONSdigital/dp-healthcheck v1.2.3
 	github.com/ONSdigital/dp-net v1.4.0
