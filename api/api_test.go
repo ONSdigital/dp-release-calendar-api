@@ -24,7 +24,7 @@ func TestSetup(t *testing.T) {
 		api := Setup(ctx, r, mockZebedeeClient)
 
 		Convey("When created the following routes should have been added", func() {
-			So(hasRoute(api.Router, "/releasecalendar/legacy", "GET"), ShouldBeTrue)
+			So(hasRoute(api.Router, "/v1/releases/legacy", "GET"), ShouldBeTrue)
 		})
 	})
 }

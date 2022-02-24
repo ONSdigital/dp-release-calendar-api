@@ -1,11 +1,11 @@
 Feature: Legacy endpoint
 
   Scenario: Call the legacy endpoint without an url parameter
-    When I GET "/releasecalendar/legacy"
+    When I GET "/v1/releases/legacy"
     Then the HTTP status code should be "404"
 
  Scenario: Call the legacy endpoint with a valid url parameter
-    When I GET "/releasecalendar/legacy?url=/release/economy"
+    When I GET "/v1/releases/legacy?url=/release/economy"
     And I should receive the following JSON response with status "200":
         """
         {
@@ -73,5 +73,5 @@ Feature: Legacy endpoint
         """
 
   Scenario: Call the legacy endpoint with an invalid url parameter
-    When I GET "/releasecalendar/legacy?url=/release/invalid"
+    When I GET "/v1/releases/legacy?url=/release/invalid"
     Then the HTTP status code should be "500"

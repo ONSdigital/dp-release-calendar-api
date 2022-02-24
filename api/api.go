@@ -17,6 +17,6 @@ func Setup(ctx context.Context, r *mux.Router, zc ZebedeeClient) *API {
 		Router: r,
 	}
 
-	r.HandleFunc("/releasecalendar/legacy", LegacyHandler(ctx, zc)).Methods("GET")
+	r.HandleFunc("/v1/releases/legacy", LegacyHandler(ctx, zc)).Methods("GET")
 	return api
 }
