@@ -13,7 +13,7 @@ tags:
   - name: "private"
   - name: "public"
 paths:
-  /legacy:
+  /releases/legacy:
     get:
       tags:
         - public
