@@ -51,7 +51,7 @@ func TestLegacyHandler(t *testing.T) {
 			accessToken := "user-access-token"
 			collectionID := "my-collection"
 
-			req := httptest.NewRequest("GET", fmt.Sprintf("http://localhost:8080/v1/releases/legacy?url=%s", url), nil)
+			req := httptest.NewRequest("GET", fmt.Sprintf("http://localhost:8080/v1/releases/legacy?url=%s&lang=cy", url), nil)
 			headers.SetAuthToken(req, accessToken)
 			headers.SetCollectionID(req, collectionID)
 
@@ -63,7 +63,7 @@ func TestLegacyHandler(t *testing.T) {
 				So(len(mockZebedeeClient.GetReleaseCalls()), ShouldEqual, 1)
 				So(mockZebedeeClient.GetReleaseCalls()[0].UserAccessToken, ShouldEqual, accessToken)
 				So(mockZebedeeClient.GetReleaseCalls()[0].CollectionID, ShouldEqual, collectionID)
-				So(mockZebedeeClient.GetReleaseCalls()[0].Lang, ShouldEqual, "en")
+				So(mockZebedeeClient.GetReleaseCalls()[0].Lang, ShouldEqual, "cy")
 				So(mockZebedeeClient.GetReleaseCalls()[0].URI, ShouldEqual, url)
 			})
 			Convey("And the response is correct", func() {

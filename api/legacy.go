@@ -22,6 +22,12 @@ func handleLegacy(w http.ResponseWriter, req *http.Request, lang, collectionID, 
 	ctx := req.Context()
 
 	urlParam := req.URL.Query().Get("url")
+	lang = func(secondary string) string {
+		if primary := req.URL.Query().Get("lang"); primary != "" {
+			return primary
+		}
+		return secondary
+	}(lang)
 
 	if urlParam == "" {
 		err := errors.New("url parameter not found")
