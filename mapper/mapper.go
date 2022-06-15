@@ -18,6 +18,8 @@ func CreateReleaseFromZebedee(zr zebedee.Release) releasecalendar.Release {
 				Telephone: zr.Description.Contact.Telephone,
 			},
 			NationalStatistic:  zr.Description.NationalStatistic,
+			WelshStatistic:     zr.Description.WelshStatistic,
+			Survey:             zr.Description.Survey,
 			ReleaseDate:        zr.Description.ReleaseDate,
 			NextRelease:        zr.Description.NextRelease,
 			Published:          zr.Description.Published,

@@ -5,7 +5,7 @@ go 1.18
 replace github.com/spf13/cobra => github.com/spf13/cobra v1.4.0
 
 require (
-	github.com/ONSdigital/dp-api-clients-go/v2 v2.92.4
+	github.com/ONSdigital/dp-api-clients-go/v2 v2.142.0
 	github.com/ONSdigital/dp-component-test v0.6.4
 	github.com/ONSdigital/dp-healthcheck v1.2.3
 	github.com/ONSdigital/dp-net v1.4.0
@@ -18,9 +18,8 @@ require (
 )
 
 require (
-	github.com/ONSdigital/dp-api-clients-go v1.41.1 // indirect
+	github.com/ONSdigital/dp-api-clients-go v1.43.0 // indirect
 	github.com/ONSdigital/dp-mongodb-in-memory v1.2.0 // indirect
-	github.com/ONSdigital/log.go v1.1.0 // indirect
 	github.com/aws/aws-sdk-go v1.38.15 // indirect
 	github.com/cucumber/gherkin-go/v19 v19.0.3 // indirect
 	github.com/cucumber/messages-go/v16 v16.0.1 // indirect
@@ -29,7 +28,7 @@ require (
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/gofrs/uuid v4.0.0+incompatible // indirect
 	github.com/golang/snappy v0.0.3 // indirect
-	github.com/gopherjs/gopherjs v0.0.0-20210202160940-bed99a852dfe // indirect
+	github.com/gopherjs/gopherjs v0.0.0-20220104163920-15ed2e8cf2bd // indirect
 	github.com/hashicorp/go-immutable-radix v1.3.1 // indirect
 	github.com/hashicorp/go-memdb v1.3.0 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
@@ -42,7 +41,7 @@ require (
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/maxcnunes/httpfake v1.2.4 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/smartystreets/assertions v1.2.0 // indirect
+	github.com/smartystreets/assertions v1.2.1 // indirect
 	github.com/spf13/afero v1.8.2 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/testify v1.7.1 // indirect
