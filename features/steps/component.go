@@ -149,6 +149,8 @@ func (c *Component) DoGetZebedeeClient(url string) api.ZebedeeClient {
 							Telephone: "029",
 						},
 						NationalStatistic:  true,
+						WelshStatistic:     true,
+						Survey:             "cenusus2021",
 						ReleaseDate:        "2020-07-08T23:00:00.000Z",
 						NextRelease:        "January 2021",
 						Published:          true,
