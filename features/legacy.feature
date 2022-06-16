@@ -6,7 +6,7 @@ Feature: Legacy endpoint
 
  Scenario: Call the legacy endpoint with a valid url parameter
     When I GET "/v1/releases/legacy?url=/release/economy"
-    And I should receive the following JSON response with status "200":
+    Then I should receive the following JSON response with status "200":
         """
         {
             "uri":"/release/economy",
@@ -60,7 +60,9 @@ Feature: Legacy endpoint
                 "name":"Contact name", 
                 "telephone":"029"
               }, 
-              "national_statistic":true, 
+              "national_statistic":true,
+              "welsh_statistic": true,
+              "survey": "cenusus2021",
               "release_date":"2020-07-08T23:00:00.000Z",
               "next_release":"January 2021",
               "published":true,
