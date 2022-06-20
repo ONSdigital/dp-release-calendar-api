@@ -65,7 +65,7 @@ func TestUnitMapper(t *testing.T) {
 				},
 				NationalStatistic:  true,
 				WelshStatistic:     true,
-				Survey:             "census2021",
+				Survey:             "census",
 				ReleaseDate:        "2020-07-08T23:00:00.000Z",
 				NextRelease:        "January 2021",
 				Published:          true,

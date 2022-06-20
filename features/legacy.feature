@@ -62,7 +62,7 @@ Feature: Legacy endpoint
               }, 
               "national_statistic":true,
               "welsh_statistic": true,
-              "survey": "cenusus2021",
+              "survey": "census",
               "release_date":"2020-07-08T23:00:00.000Z",
               "next_release":"January 2021",
               "published":true,

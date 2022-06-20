@@ -150,7 +150,7 @@ func (c *Component) DoGetZebedeeClient(url string) api.ZebedeeClient {
 						},
 						NationalStatistic:  true,
 						WelshStatistic:     true,
-						Survey:             "cenusus2021",
+						Survey:             "census",
 						ReleaseDate:        "2020-07-08T23:00:00.000Z",
 						NextRelease:        "January 2021",
 						Published:          true,
