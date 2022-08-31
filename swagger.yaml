@@ -132,6 +132,13 @@ definitions:
           national_statistic:
             type: boolean
             description: "Indicates if it refers to a national statistic"
+          welsh_statistic:
+            type: boolean
+            description: "Indicates if it refers to a Welsh statistic"
+          survey:
+            type: string
+            description: "Indicates the survey this release belongs to, if any"
+            example: "census"
           release_date:
             type: string
             format: "date-time"
