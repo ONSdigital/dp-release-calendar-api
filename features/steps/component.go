@@ -106,6 +106,13 @@ func (c *Component) DoGetZebedeeClient(url string) api.ZebedeeClient {
 							URI:     "/doc/1",
 						},
 					},
+					RelatedAPIDatasets: []zebedee.Link{
+						{
+							Title:   "API dataset 1",
+							Summary: "This is api dataset 1",
+							URI:     "/api-dataset/1",
+						},
+					},
 					RelatedDatasets: []zebedee.Link{
 						{
 							Title:   "Dataset 1",

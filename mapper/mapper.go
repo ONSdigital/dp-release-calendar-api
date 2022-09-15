@@ -30,6 +30,7 @@ func CreateReleaseFromZebedee(zr zebedee.Release) releasecalendar.Release {
 		},
 	}
 	release.RelatedDocuments = mapZebedeeLink(zr.RelatedDocuments)
+	release.RelatedAPIDatasets = mapZebedeeLink(zr.RelatedAPIDatasets)
 	release.RelatedDatasets = mapZebedeeLink(zr.RelatedDatasets)
 	release.RelatedMethodology = mapZebedeeLink(zr.RelatedMethodology)
 	release.RelatedMethodologyArticle = mapZebedeeLink(zr.RelatedMethodologyArticle)

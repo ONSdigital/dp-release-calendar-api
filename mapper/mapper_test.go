@@ -93,7 +93,7 @@ func TestUnitMapper(t *testing.T) {
 			So(release.DateChanges[0].ChangeNotice, ShouldEqual, zr.DateChanges[0].ChangeNotice)
 			So(release.DateChanges[0].Date, ShouldEqual, zr.DateChanges[0].Date)
 			assertLinks(zr.RelatedDocuments, release.RelatedDocuments)
-			assertLinks(zr.RelatedDocuments, release.RelatedDocuments)
+			assertLinks(zr.RelatedAPIDatasets, release.RelatedAPIDatasets)
 			assertLinks(zr.RelatedDatasets, release.RelatedDatasets)
 			assertLinks(zr.RelatedMethodology, release.RelatedMethodology)
 			assertLinks(zr.RelatedMethodologyArticle, release.RelatedMethodologyArticle)

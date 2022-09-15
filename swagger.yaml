@@ -84,6 +84,11 @@ definitions:
         description: "Related datasets"
         items:
          $ref: '#/definitions/Link'
+      related_api_datasets:
+        type: array
+        description: "Related API datasets"
+        items:
+         $ref: '#/definitions/Link'
       related_methodology:
         type: array
         description: "Related methodology"

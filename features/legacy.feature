@@ -18,6 +18,13 @@ Feature: Legacy endpoint
                 "uri": "/doc/1"
                 }
             ],
+            "related_api_datasets": [
+                {
+                "title": "API dataset 1",
+                "summary": "This is api dataset 1",
+                "uri": "/api-dataset/1"
+                }
+            ],
             "related_datasets": [
                 {
                 "title": "Dataset 1",
