@@ -1,11 +1,11 @@
 module github.com/ONSdigital/dp-release-calendar-api
 
-go 1.18
+go 1.19
 
 replace github.com/spf13/cobra => github.com/spf13/cobra v1.4.0
 
 require (
-	github.com/ONSdigital/dp-api-clients-go/v2 v2.195.0
+	github.com/ONSdigital/dp-api-clients-go/v2 v2.204.0
 	github.com/ONSdigital/dp-component-test v0.6.4
 	github.com/ONSdigital/dp-healthcheck v1.3.0
 	github.com/ONSdigital/dp-net v1.5.0
