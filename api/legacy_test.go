@@ -15,7 +15,6 @@ import (
 )
 
 func TestLegacyHandler(t *testing.T) {
-
 	Convey("Given a Legacy handler ", t, func() {
 		url := "/release/adoption"
 		r := zebedee.Release{URI: url, Description: zebedee.Description{Title: "Test"}}

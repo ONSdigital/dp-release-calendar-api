@@ -9,7 +9,6 @@ import (
 )
 
 func TestUnitMapper(t *testing.T) {
-
 	Convey("Given a zebedee release", t, func() {
 		zr := zebedee.Release{
 			URI:      "/release/example",
