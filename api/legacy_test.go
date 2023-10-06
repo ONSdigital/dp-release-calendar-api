@@ -27,7 +27,7 @@ func TestLegacyHandler(t *testing.T) {
 		handler := LegacyHandler(context.Background(), mockZebedeeClient)
 
 		Convey("when a valid request without headers is received (web)", func() {
-			req := httptest.NewRequest("GET", fmt.Sprintf("http://localhost:8080/v1/releases/legacy?url=%s", url), nil)
+			req := httptest.NewRequest("GET", fmt.Sprintf("http://localhost:8080/v1/releases/legacy?url=%s", url), http.NoBody)
 			resp := httptest.NewRecorder()
 
 			handler.ServeHTTP(resp, req)
@@ -51,7 +51,7 @@ func TestLegacyHandler(t *testing.T) {
 			accessToken := "user-access-token"
 			collectionID := "my-collection"
 
-			req := httptest.NewRequest("GET", fmt.Sprintf("http://localhost:8080/v1/releases/legacy?url=%s&lang=cy", url), nil)
+			req := httptest.NewRequest("GET", fmt.Sprintf("http://localhost:8080/v1/releases/legacy?url=%s&lang=cy", url), http.NoBody)
 			headers.SetAuthToken(req, accessToken)
 			headers.SetCollectionID(req, collectionID)
 
