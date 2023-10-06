@@ -2,7 +2,8 @@ module github.com/ONSdigital/dp-release-calendar-api
 
 go 1.21
 
-replace github.com/spf13/cobra => github.com/spf13/cobra v1.4.0
+// to fix: [CVE-2023-32731]
+replace google.golang.org/grpc => google.golang.org/grpc v1.58.2
 
 require (
 	github.com/ONSdigital/dp-api-clients-go/v2 v2.254.1
