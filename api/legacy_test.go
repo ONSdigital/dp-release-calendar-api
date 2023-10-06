@@ -75,7 +75,7 @@ func TestLegacyHandler(t *testing.T) {
 		})
 
 		Convey("when a request without an url parameter is received", func() {
-			req := httptest.NewRequest("GET", "http://localhost:8080/v1/releases/legacy", nil)
+			req := httptest.NewRequest("GET", "http://localhost:8080/v1/releases/legacy", http.NoBody)
 			resp := httptest.NewRecorder()
 
 			handler.ServeHTTP(resp, req)
@@ -87,7 +87,7 @@ func TestLegacyHandler(t *testing.T) {
 		})
 
 		Convey("when a request with an empty url parameter is received", func() {
-			req := httptest.NewRequest("GET", "http://localhost:8080/v1/releases/legacy?url=", nil)
+			req := httptest.NewRequest("GET", "http://localhost:8080/v1/releases/legacy?url=", http.NoBody)
 			resp := httptest.NewRecorder()
 
 			handler.ServeHTTP(resp, req)
