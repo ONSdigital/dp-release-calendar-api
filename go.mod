@@ -1,6 +1,6 @@
 module github.com/ONSdigital/dp-release-calendar-api
 
-go 1.19
+go 1.21
 
 replace github.com/spf13/cobra => github.com/spf13/cobra v1.4.0
 
