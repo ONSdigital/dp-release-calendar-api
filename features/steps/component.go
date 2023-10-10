@@ -26,8 +26,8 @@ type Component struct {
 	apiFeature     *componenttest.APIFeature
 }
 
+//nolint:gosec // component test
 func NewComponent() (*Component, error) {
-
 	c := &Component{
 		HTTPServer:     &http.Server{},
 		errorChan:      make(chan error),
