@@ -168,7 +168,7 @@ func (c *Component) DoGetZebedeeClient(url string) api.ZebedeeClient {
 					},
 				}, nil
 			}
-			return zebedee.Release{}, errors.New("Unsupported endpoint")
+			return zebedee.Release{}, errors.New("unsupported endpoint")
 		},
 	}
 }
