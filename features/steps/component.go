@@ -78,6 +78,7 @@ func (c *Component) InitialiseService() (http.Handler, error) {
 	return c.HTTPServer.Handler, nil
 }
 
+//nolint:revive // component test code
 func (c *Component) DoGetHealthcheckOk(cfg *config.Config, buildTime, gitCommit, version string) (service.HealthChecker, error) {
 	return &mock.HealthCheckerMock{
 		AddCheckFunc: func(name string, checker healthcheck.Checker) error { return nil },
@@ -92,6 +93,7 @@ func (c *Component) DoGetHTTPServer(bindAddr string, router http.Handler) servic
 	return c.HTTPServer
 }
 
+//nolint:revive // component test code
 func (c *Component) DoGetZebedeeClient(url string) api.ZebedeeClient {
 	return &api.ZebedeeClientMock{
 		GetReleaseFunc: func(ctx context.Context, userAccessToken, collectionID, lang, uri string) (zebedee.Release, error) {
