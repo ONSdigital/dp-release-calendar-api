@@ -41,9 +41,7 @@ var funcDoGetHTTPServerNil = func(bindAddr string, router http.Handler) service.
 }
 
 func TestRun(t *testing.T) {
-
 	Convey("Having a set of mocked dependencies", t, func() {
-
 		cfg, err := config.Get()
 		So(err, ShouldBeNil)
 
@@ -83,7 +81,6 @@ func TestRun(t *testing.T) {
 		}
 
 		Convey("Given that initialising healthcheck returns an error", func() {
-
 			// setup (run before each `Convey` at this scope / indentation):
 			initMock := &serviceMock.InitialiserMock{
 				DoGetHTTPServerFunc:    funcDoGetHTTPServerNil,
