@@ -40,8 +40,8 @@ func TestLegacyHandler(t *testing.T) {
 			})
 			Convey("And the response is correct", func() {
 				So(resp.Code, ShouldEqual, http.StatusOK)
-				expectedJson, _ := json.Marshal(mapper.CreateReleaseFromZebedee(r))
-				So(resp.Body.Bytes(), ShouldResemble, expectedJson)
+				expectedJSON, _ := json.Marshal(mapper.CreateReleaseFromZebedee(r))
+				So(resp.Body.Bytes(), ShouldResemble, expectedJSON)
 				So(len(mockZebedeeClient.GetReleaseCalls()), ShouldEqual, 1)
 			})
 		})
@@ -67,8 +67,8 @@ func TestLegacyHandler(t *testing.T) {
 			})
 			Convey("And the response is correct", func() {
 				So(resp.Code, ShouldEqual, http.StatusOK)
-				expectedJson, _ := json.Marshal(mapper.CreateReleaseFromZebedee(r))
-				So(resp.Body.Bytes(), ShouldResemble, expectedJson)
+				expectedJSON, _ := json.Marshal(mapper.CreateReleaseFromZebedee(r))
+				So(resp.Body.Bytes(), ShouldResemble, expectedJSON)
 				So(len(mockZebedeeClient.GetReleaseCalls()), ShouldEqual, 1)
 			})
 		})
