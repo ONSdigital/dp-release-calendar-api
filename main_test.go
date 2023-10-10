@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"flag"
-	"fmt"
 	"os"
 	"testing"
 
@@ -26,9 +25,7 @@ func (f *ComponentTest) InitializeScenario(godogCtx *godog.ScenarioContext) {
 	}
 
 	godogCtx.Before(func(ctx context.Context, sc *godog.Scenario) (context.Context, error) {
-		if err := component.Reset(); err != nil {
-			return ctx, fmt.Errorf("unable to initialise scenario: %v", err)
-		}
+		component.Reset()
 		return ctx, nil
 	})
 
@@ -40,7 +37,7 @@ func (f *ComponentTest) InitializeScenario(godogCtx *godog.ScenarioContext) {
 	component.RegisterSteps(godogCtx)
 }
 
-func (f *ComponentTest) InitializeTestSuite(ctx *godog.TestSuiteContext) {
+func (f *ComponentTest) InitializeTestSuite(_ *godog.TestSuiteContext) {
 
 }
 
