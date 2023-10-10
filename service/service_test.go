@@ -192,8 +192,8 @@ func TestRun(t *testing.T) {
 
 func TestClose(t *testing.T) {
 	Convey("Having a correctly initialised service", t, func() {
-		cfg, err := config.Get()
-		So(err, ShouldBeNil)
+		cfg, configErr := config.Get()
+		So(configErr, ShouldBeNil)
 
 		hcStopped := false
 
@@ -282,9 +282,9 @@ func TestClose(t *testing.T) {
 				HealthCheck: hcMock,
 			}
 
-			err = svc.Close(context.Background())
-			So(err, ShouldNotBeNil)
-			So(err.Error(), ShouldResemble, "context deadline exceeded")
+			configErr = svc.Close(context.Background())
+			So(configErr, ShouldNotBeNil)
+			So(configErr.Error(), ShouldResemble, "context deadline exceeded")
 			So(len(hcMock.StopCalls()), ShouldEqual, 1)
 			So(len(timeoutServerMock.ShutdownCalls()), ShouldEqual, 1)
 		})
