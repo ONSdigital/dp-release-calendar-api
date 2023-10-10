@@ -257,9 +257,9 @@ func TestClose(t *testing.T) {
 			svc, err := service.Run(ctx, cfg, svcList, testBuildTime, testGitCommit, testVersion, svcErrors)
 			So(err, ShouldBeNil)
 
-			err = svc.Close(context.Background())
-			So(len(hcMock.StopCalls()), ShouldEqual, 1)
-			So(len(failingserverMock.ShutdownCalls()), ShouldEqual, 1)
+			svc.Close(context.Background())
+			So(hcMock.StopCalls(), ShouldHaveLength, 1)
+			So(failingserverMock.ShutdownCalls(), ShouldHaveLength, 1)
 		})
 
 		Convey("If service times out while shutting down, the Close operation fails with the expected error", func() {
