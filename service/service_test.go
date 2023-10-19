@@ -13,7 +13,6 @@ import (
 	"github.com/ONSdigital/dp-release-calendar-api/api"
 	"github.com/ONSdigital/dp-release-calendar-api/config"
 	"github.com/ONSdigital/dp-release-calendar-api/service"
-	"github.com/ONSdigital/dp-release-calendar-api/service/mock"
 	serviceMock "github.com/ONSdigital/dp-release-calendar-api/service/mock"
 
 	"github.com/pkg/errors"
@@ -41,9 +40,7 @@ var funcDoGetHTTPServerNil = func(bindAddr string, router http.Handler) service.
 }
 
 func TestRun(t *testing.T) {
-
 	Convey("Having a set of mocked dependencies", t, func() {
-
 		cfg, err := config.Get()
 		So(err, ShouldBeNil)
 
@@ -83,7 +80,6 @@ func TestRun(t *testing.T) {
 		}
 
 		Convey("Given that initialising healthcheck returns an error", func() {
-
 			// setup (run before each `Convey` at this scope / indentation):
 			initMock := &serviceMock.InitialiserMock{
 				DoGetHTTPServerFunc:    funcDoGetHTTPServerNil,
@@ -105,7 +101,6 @@ func TestRun(t *testing.T) {
 		})
 
 		Convey("Given that all dependencies are successfully initialised", func() {
-
 			// setup (run before each `Convey` at this scope / indentation):
 			initMock := &serviceMock.InitialiserMock{
 				DoGetHTTPServerFunc:    funcDoGetHTTPServer,
@@ -138,7 +133,6 @@ func TestRun(t *testing.T) {
 		})
 
 		Convey("Given that Checkers cannot be registered", func() {
-
 			// setup (run before each `Convey` at this scope / indentation):
 			errAddheckFail := errors.New("Error(s) registering checkers for healthcheck")
 			hcMockAddFail := &serviceMock.HealthCheckerMock{
@@ -170,7 +164,6 @@ func TestRun(t *testing.T) {
 		})
 
 		Convey("Given that all dependencies are successfully initialised but the http server fails", func() {
-
 			// setup (run before each `Convey` at this scope / indentation):
 			initMock := &serviceMock.InitialiserMock{
 				DoGetHealthCheckFunc:   funcDoGetHealthcheckOk,
@@ -197,11 +190,9 @@ func TestRun(t *testing.T) {
 }
 
 func TestClose(t *testing.T) {
-
 	Convey("Having a correctly initialised service", t, func() {
-
-		cfg, err := config.Get()
-		So(err, ShouldBeNil)
+		cfg, configErr := config.Get()
+		So(configErr, ShouldBeNil)
 
 		hcStopped := false
 
@@ -215,7 +206,7 @@ func TestClose(t *testing.T) {
 		zcMock := &api.ZebedeeClientMock{}
 
 		// server Shutdown will fail if healthcheck is not stopped
-		serverMock := &mock.HTTPServerMock{
+		serverMock := &serviceMock.HTTPServerMock{
 			ListenAndServeFunc: func() error { return nil },
 			ShutdownFunc: func(ctx context.Context) error {
 				if !hcStopped {
@@ -226,8 +217,7 @@ func TestClose(t *testing.T) {
 		}
 
 		Convey("Closing the service results in all the dependencies being closed in the expected order", func() {
-
-			initMock := &mock.InitialiserMock{
+			initMock := &serviceMock.InitialiserMock{
 				DoGetHTTPServerFunc: func(bindAddr string, router http.Handler) service.HTTPServer { return serverMock },
 				DoGetHealthCheckFunc: func(cfg *config.Config, buildTime string, gitCommit string, version string) (service.HealthChecker, error) {
 					return hcMock, nil
@@ -247,15 +237,14 @@ func TestClose(t *testing.T) {
 		})
 
 		Convey("If services fail to stop, the Close operation tries to close all dependencies and returns an error", func() {
-
-			failingserverMock := &mock.HTTPServerMock{
+			failingserverMock := &serviceMock.HTTPServerMock{
 				ListenAndServeFunc: func() error { return nil },
 				ShutdownFunc: func(ctx context.Context) error {
 					return errors.New("Failed to stop http server")
 				},
 			}
 
-			initMock := &mock.InitialiserMock{
+			initMock := &serviceMock.InitialiserMock{
 				DoGetHTTPServerFunc: func(bindAddr string, router http.Handler) service.HTTPServer { return failingserverMock },
 				DoGetHealthCheckFunc: func(cfg *config.Config, buildTime string, gitCommit string, version string) (service.HealthChecker, error) {
 					return hcMock, nil
@@ -268,15 +257,14 @@ func TestClose(t *testing.T) {
 			svc, err := service.Run(ctx, cfg, svcList, testBuildTime, testGitCommit, testVersion, svcErrors)
 			So(err, ShouldBeNil)
 
-			err = svc.Close(context.Background())
-			//So(err, ShouldNotBeNil)
-			So(len(hcMock.StopCalls()), ShouldEqual, 1)
-			So(len(failingserverMock.ShutdownCalls()), ShouldEqual, 1)
+			svc.Close(context.Background())
+			So(hcMock.StopCalls(), ShouldHaveLength, 1)
+			So(failingserverMock.ShutdownCalls(), ShouldHaveLength, 1)
 		})
 
 		Convey("If service times out while shutting down, the Close operation fails with the expected error", func() {
 			cfg.GracefulShutdownTimeout = 1 * time.Millisecond
-			timeoutServerMock := &mock.HTTPServerMock{
+			timeoutServerMock := &serviceMock.HTTPServerMock{
 				ListenAndServeFunc: func() error { return nil },
 				ShutdownFunc: func(ctx context.Context) error {
 					time.Sleep(2 * time.Millisecond)
@@ -293,9 +281,9 @@ func TestClose(t *testing.T) {
 				HealthCheck: hcMock,
 			}
 
-			err = svc.Close(context.Background())
-			So(err, ShouldNotBeNil)
-			So(err.Error(), ShouldResemble, "context deadline exceeded")
+			configErr = svc.Close(context.Background())
+			So(configErr, ShouldNotBeNil)
+			So(configErr.Error(), ShouldResemble, "context deadline exceeded")
 			So(len(hcMock.StopCalls()), ShouldEqual, 1)
 			So(len(timeoutServerMock.ShutdownCalls()), ShouldEqual, 1)
 		})

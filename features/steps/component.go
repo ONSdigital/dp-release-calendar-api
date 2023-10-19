@@ -26,8 +26,8 @@ type Component struct {
 	apiFeature     *componenttest.APIFeature
 }
 
+//nolint:gosec // component test
 func NewComponent() (*Component, error) {
-
 	c := &Component{
 		HTTPServer:     &http.Server{},
 		errorChan:      make(chan error),
@@ -78,7 +78,8 @@ func (c *Component) InitialiseService() (http.Handler, error) {
 	return c.HTTPServer.Handler, nil
 }
 
-func (c *Component) DoGetHealthcheckOk(cfg *config.Config, buildTime string, gitCommit string, version string) (service.HealthChecker, error) {
+//nolint:revive // component test code
+func (c *Component) DoGetHealthcheckOk(cfg *config.Config, buildTime, gitCommit, version string) (service.HealthChecker, error) {
 	return &mock.HealthCheckerMock{
 		AddCheckFunc: func(name string, checker healthcheck.Checker) error { return nil },
 		StartFunc:    func(ctx context.Context) {},
@@ -92,6 +93,7 @@ func (c *Component) DoGetHTTPServer(bindAddr string, router http.Handler) servic
 	return c.HTTPServer
 }
 
+//nolint:revive // component test code
 func (c *Component) DoGetZebedeeClient(url string) api.ZebedeeClient {
 	return &api.ZebedeeClientMock{
 		GetReleaseFunc: func(ctx context.Context, userAccessToken, collectionID, lang, uri string) (zebedee.Release, error) {
@@ -168,7 +170,7 @@ func (c *Component) DoGetZebedeeClient(url string) api.ZebedeeClient {
 					},
 				}, nil
 			}
-			return zebedee.Release{}, errors.New("Unsupported endpoint")
+			return zebedee.Release{}, errors.New("unsupported endpoint")
 		},
 	}
 }

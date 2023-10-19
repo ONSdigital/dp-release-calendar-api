@@ -15,7 +15,6 @@ import (
 )
 
 func TestLegacyHandler(t *testing.T) {
-
 	Convey("Given a Legacy handler ", t, func() {
 		url := "/release/adoption"
 		r := zebedee.Release{URI: url, Description: zebedee.Description{Title: "Test"}}
@@ -27,7 +26,7 @@ func TestLegacyHandler(t *testing.T) {
 		handler := LegacyHandler(context.Background(), mockZebedeeClient)
 
 		Convey("when a valid request without headers is received (web)", func() {
-			req := httptest.NewRequest("GET", fmt.Sprintf("http://localhost:8080/v1/releases/legacy?url=%s", url), nil)
+			req := httptest.NewRequest("GET", fmt.Sprintf("http://localhost:8080/v1/releases/legacy?url=%s", url), http.NoBody)
 			resp := httptest.NewRecorder()
 
 			handler.ServeHTTP(resp, req)
@@ -41,8 +40,8 @@ func TestLegacyHandler(t *testing.T) {
 			})
 			Convey("And the response is correct", func() {
 				So(resp.Code, ShouldEqual, http.StatusOK)
-				expectedJson, _ := json.Marshal(mapper.CreateReleaseFromZebedee(r))
-				So(resp.Body.Bytes(), ShouldResemble, expectedJson)
+				expectedJSON, _ := json.Marshal(mapper.CreateReleaseFromZebedee(r))
+				So(resp.Body.Bytes(), ShouldResemble, expectedJSON)
 				So(len(mockZebedeeClient.GetReleaseCalls()), ShouldEqual, 1)
 			})
 		})
@@ -51,7 +50,7 @@ func TestLegacyHandler(t *testing.T) {
 			accessToken := "user-access-token"
 			collectionID := "my-collection"
 
-			req := httptest.NewRequest("GET", fmt.Sprintf("http://localhost:8080/v1/releases/legacy?url=%s&lang=cy", url), nil)
+			req := httptest.NewRequest("GET", fmt.Sprintf("http://localhost:8080/v1/releases/legacy?url=%s&lang=cy", url), http.NoBody)
 			headers.SetAuthToken(req, accessToken)
 			headers.SetCollectionID(req, collectionID)
 
@@ -68,14 +67,14 @@ func TestLegacyHandler(t *testing.T) {
 			})
 			Convey("And the response is correct", func() {
 				So(resp.Code, ShouldEqual, http.StatusOK)
-				expectedJson, _ := json.Marshal(mapper.CreateReleaseFromZebedee(r))
-				So(resp.Body.Bytes(), ShouldResemble, expectedJson)
+				expectedJSON, _ := json.Marshal(mapper.CreateReleaseFromZebedee(r))
+				So(resp.Body.Bytes(), ShouldResemble, expectedJSON)
 				So(len(mockZebedeeClient.GetReleaseCalls()), ShouldEqual, 1)
 			})
 		})
 
 		Convey("when a request without an url parameter is received", func() {
-			req := httptest.NewRequest("GET", "http://localhost:8080/v1/releases/legacy", nil)
+			req := httptest.NewRequest("GET", "http://localhost:8080/v1/releases/legacy", http.NoBody)
 			resp := httptest.NewRecorder()
 
 			handler.ServeHTTP(resp, req)
@@ -87,7 +86,7 @@ func TestLegacyHandler(t *testing.T) {
 		})
 
 		Convey("when a request with an empty url parameter is received", func() {
-			req := httptest.NewRequest("GET", "http://localhost:8080/v1/releases/legacy?url=", nil)
+			req := httptest.NewRequest("GET", "http://localhost:8080/v1/releases/legacy?url=", http.NoBody)
 			resp := httptest.NewRecorder()
 
 			handler.ServeHTTP(resp, req)

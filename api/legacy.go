@@ -14,13 +14,11 @@ import (
 
 func LegacyHandler(ctx context.Context, zc ZebedeeClient) http.HandlerFunc {
 	return dphandlers.ControllerHandler(func(w http.ResponseWriter, r *http.Request, lang, collectionID, accessToken string) {
-		handleLegacy(w, r, lang, collectionID, accessToken, zc)
+		handleLegacy(ctx, w, r, lang, collectionID, accessToken, zc)
 	})
 }
 
-func handleLegacy(w http.ResponseWriter, req *http.Request, lang, collectionID, accessToken string, zc ZebedeeClient) {
-	ctx := req.Context()
-
+func handleLegacy(ctx context.Context, w http.ResponseWriter, req *http.Request, lang, collectionID, accessToken string, zc ZebedeeClient) {
 	urlParam := req.URL.Query().Get("url")
 	lang = func(secondary string) string {
 		if primary := req.URL.Query().Get("lang"); primary != "" {
