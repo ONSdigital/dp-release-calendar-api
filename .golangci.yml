@@ -7,8 +7,8 @@ run:
   # timeout for analysis, e.g. 30s, 5m, default is 1m
   timeout: 5m
 linters-settings:
-  govet:
-    check-shadowing: true
+  shadow:
+    strict: true
   golint:
     min-confidence: 0
   gocyclo:
