@@ -62,6 +62,7 @@ func TestUnitMapper(t *testing.T) {
 					Name:      "Contact name",
 					Telephone: "029",
 				},
+				MigrationLink:      "/redirect1",
 				NationalStatistic:  true,
 				WelshStatistic:     true,
 				Survey:             "census",
@@ -99,6 +100,7 @@ func TestUnitMapper(t *testing.T) {
 			assertLinks(zr.Links, release.Links)
 			So(release.Description.Title, ShouldEqual, zr.Description.Title)
 			So(release.Description.Summary, ShouldEqual, zr.Description.Summary)
+			So(release.Description.MigrationLink, ShouldEqual, zr.Description.MigrationLink)
 			So(release.Description.NationalStatistic, ShouldEqual, zr.Description.NationalStatistic)
 			So(release.Description.WelshStatistic, ShouldEqual, zr.Description.WelshStatistic)
 			So(release.Description.Survey, ShouldEqual, zr.Description.Survey)

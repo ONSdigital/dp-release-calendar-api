@@ -67,6 +67,7 @@ Feature: Legacy endpoint
                 "name":"Contact name", 
                 "telephone":"029"
               }, 
+              "migration_link": "/redirect1",
               "national_statistic":true,
               "welsh_statistic": true,
               "survey": "census",

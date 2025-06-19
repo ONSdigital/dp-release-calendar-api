@@ -157,6 +157,7 @@ func (c *Component) DoGetZebedeeClient(url string) api.ZebedeeClient {
 							Name:      "Contact name",
 							Telephone: "029",
 						},
+						MigrationLink:      "/redirect1",
 						NationalStatistic:  true,
 						WelshStatistic:     true,
 						Survey:             "census",

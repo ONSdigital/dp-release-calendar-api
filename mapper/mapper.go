@@ -17,6 +17,7 @@ func CreateReleaseFromZebedee(zr zebedee.Release) releasecalendar.Release {
 				Email:     zr.Description.Contact.Email,
 				Telephone: zr.Description.Contact.Telephone,
 			},
+			MigrationLink:      zr.Description.MigrationLink,
 			NationalStatistic:  zr.Description.NationalStatistic,
 			WelshStatistic:     zr.Description.WelshStatistic,
 			Survey:             zr.Description.Survey,
