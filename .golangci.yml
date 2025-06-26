@@ -61,10 +61,6 @@ linters:
           - gosec
           - revive
         path: _test\.go
-    paths:
-      - third_party$
-      - builtin$
-      - examples$
 issues:
   new: false
 formatters:
@@ -76,7 +72,3 @@ formatters:
       simplify: false
   exclusions:
     generated: lax
-    paths:
-      - third_party$
-      - builtin$
-      - examples$
