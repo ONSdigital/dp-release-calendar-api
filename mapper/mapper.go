@@ -49,7 +49,7 @@ func CreateReleaseFromZebedee(zr zebedee.Release) releasecalendar.Release {
 }
 
 func mapZebedeeLink(origin []zebedee.Link) []releasecalendar.Link {
-	res := []releasecalendar.Link{}
+	res := make([]releasecalendar.Link, 0, len(origin))
 	for _, related := range origin {
 		res = append(res, releasecalendar.Link{
 			Title:   related.Title,
