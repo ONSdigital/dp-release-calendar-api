@@ -12,6 +12,6 @@ import (
 
 // ZebedeeClient defines the required methods to talk to Zebedee
 type ZebedeeClient interface {
-	GetRelease(ctx context.Context, userAccessToken, collectionID, lang, uri string) (zebedee.Release, error)
+	GetRelease(ctx context.Context, authToken, collectionID, lang, uri string) (zebedee.Release, error)
 	Checker(ctx context.Context, check *healthcheck.CheckState) error
 }
