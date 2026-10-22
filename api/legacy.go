@@ -18,7 +18,8 @@ func LegacyHandler(ctx context.Context, zc ZebedeeClient) http.HandlerFunc {
 	})
 }
 
-func handleLegacy(ctx context.Context, w http.ResponseWriter, req *http.Request, lang, collectionID, accessToken string, zc ZebedeeClient) {
+func handleLegacy(_ context.Context, w http.ResponseWriter, req *http.Request, lang, collectionID, accessToken string, zc ZebedeeClient) {
+	reqCtx := req.Context()
 	urlParam := req.URL.Query().Get("url")
 	lang = func(secondary string) string {
 		if primary := req.URL.Query().Get("lang"); primary != "" {
@@ -29,14 +30,14 @@ func handleLegacy(ctx context.Context, w http.ResponseWriter, req *http.Request,
 
 	if urlParam == "" {
 		err := errors.New("url parameter not found")
-		log.Error(ctx, "url parameter not found", err)
+		log.Error(reqCtx, "url parameter not found", err)
 		http.Error(w, "URL not found", http.StatusNotFound)
 		return
 	}
 
-	zebedeeRelease, err := zc.GetRelease(ctx, accessToken, collectionID, lang, urlParam)
+	zebedeeRelease, err := zc.GetRelease(reqCtx, accessToken, collectionID, lang, urlParam)
 	if err != nil {
-		setStatusCode(ctx, w, "retrieving release from Zebedee", err)
+		setStatusCode(reqCtx, w, "failed to retrieve release from Zebedee", err)
 		return
 	}
 
@@ -45,13 +46,13 @@ func handleLegacy(ctx context.Context, w http.ResponseWriter, req *http.Request,
 	w.Header().Set("Content-Type", "application/json")
 	jsonResponse, err := json.Marshal(response)
 	if err != nil {
-		setStatusCode(ctx, w, "marshalling response failed", err)
+		setStatusCode(reqCtx, w, "marshalling response failed", err)
 		return
 	}
 
 	_, err = w.Write(jsonResponse)
 	if err != nil {
-		setStatusCode(ctx, w, "writing response failed", err)
+		setStatusCode(reqCtx, w, "writing response failed", err)
 		return
 	}
 }
